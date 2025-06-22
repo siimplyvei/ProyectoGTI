@@ -1,6 +1,6 @@
-# Ticket Manager Frontend
+# Proyecto Sistema de Tickets
 
-Este es un proyecto frontend simple para la gestión de proyectos y peticiones (tickets), utilizando **HTML, CSS, JavaScript y TypeScript** con almacenamiento en **localStorage** como backend temporal.
+Este es un proyecto frontend simple para la gestión de proyectos y peticiones (tickets), utilizando **HTML, CSS, JavaScript y TypeScript** con llamadas al API de **RedMine** para nuestro BackEnd.
 
 ## 🧩 Características
 
@@ -18,19 +18,6 @@ Este es un proyecto frontend simple para la gestión de proyectos y peticiones (
 - JavaScript (ES6)
 - TypeScript
 - RedMine (API)
-
-## 📁 Estructura del proyecto
-/ProyectoGTI/
-├── index.html
-├── project.html
-├── styles.css
-├── README.md
-├── ts/
-│ ├── types.ts
-│ └── helpers.ts
-└── js/
-├── main.js
-└── project.js
 
 
 ## 🚀 Cómo usar
