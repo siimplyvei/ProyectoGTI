@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestor de Proyectos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Proyectos</h1>
+
+  <button onclick="showProjectForm()">Nuevo Proyecto</button>
+
+  <div id="project-form" class="hidden">
+    <input type="text" id="project-name" placeholder="Nombre del proyecto" />
+    <button onclick="createProject()">Crear</button>
+    <button onclick="hideProjectForm()">Cancelar</button>
+  </div>
+
+  <div id="project-list" class="project-container"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
