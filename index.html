@@ -1,23 +1,59 @@
-<body>
-  <header>
-    <h1>Gestor de Proyectos</h1>
-  </header>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="js/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Project Dashboard</h1>
+      <p>Manage your projects and track tickets efficiently</p>
+    </header>
+    <main class="dashboard">
+      <section class="projects-section">
+        <div class="projects-header">
+          <h2>Projects</h2>
+          <button onclick="showProjectForm()" class="new-button">+ New Project</button>
+        </div>
+        <div id="project-form" class="hidden form-box">
+          <input type="text" id="project-name" placeholder="Project Name" />
+          <button onclick="createProject()">Create</button>
+          <button onclick="hideProjectForm()">Cancel</button>
+        </div>
+        <div id="project-list" class="project-container"></div>
+      </section>
 
-  <main>
-    <button onclick="showProjectForm()">Nuevo Proyecto</button>
-
-    <div id="project-form" class="hidden">
-      <input type="text" id="project-name" placeholder="Nombre del proyecto" />
-      <button onclick="createProject()">Crear</button>
-      <button onclick="hideProjectForm()">Cancelar</button>
-    </div>
-
-    <div id="project-list" class="project-container"></div>
-  </main>
-
-  <footer>
-    <p>© 2025 Ticket Manager</p>
-  </footer>
-
-  <script src="js/main.js"></script>
-</body>
+      <section class="tickets-section">
+        <div class="tickets-header">
+          <h2 id="ticket-title">Tickets - [Project]</h2>
+          <span id="ticket-count">0 tickets total</span>
+          <button onclick="showTicketForm()" class="new-button">+ New Ticket</button>
+        </div>
+        <div id="ticket-form" class="hidden form-box">
+          <input type="text" id="ticket-subject" placeholder="Ticket subject" />
+          <button onclick="createTicket()">Add</button>
+          <button onclick="hideTicketForm()">Cancel</button>
+        </div>
+        <table class="ticket-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" /></th>
+              <th>#</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>Prioridad</th>
+              <th>Asunto</th>
+            </tr>
+          </thead>
+          <tbody id="ticket-table-body"></tbody>
+        </table>
+      </section>
+    </main>
+    <footer>
+      <p>© 2025 Ticket Manager</p>
+    </footer>
+  </body>
+</html>

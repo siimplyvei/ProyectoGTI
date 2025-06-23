@@ -54,24 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const project = projects[index];
 
   if (!project) return;
-  document.getElementById('project-title').innerText = project.name;
+  document.getElementById('ticket-title').innerText = `Tickets - ${project.name}`;
+  document.getElementById('ticket-count').innerText = `${project.tickets.length} tickets total`;
 
   const tbody = document.getElementById('ticket-table-body');
   project.tickets.forEach((ticket, idx) => {
     const row = document.createElement('tr');
     row.innerHTML = `
+      <td><input type="checkbox" /></td>
       <td>${idx + 1}</td>
-      <td>${ticket.type}</td>
-      <td>${ticket.status}</td>
-      <td>
-        <select onchange="updatePriority(${idx}, this.value)">
-          <option value="Low" ${ticket.priority === 'Low' ? 'selected' : ''}>Low</option>
-          <option value="Normal" ${ticket.priority === 'Normal' ? 'selected' : ''}>Normal</option>
-          <option value="High" ${ticket.priority === 'High' ? 'selected' : ''}>High</option>
-        </select>
-      </td>
+      <td><span class="badge bug">${ticket.type}</span></td>
+      <td><span class="badge new">${ticket.status}</span></td>
+      <td><span class="badge normal">${ticket.priority}</span></td>
       <td ondblclick="editSubject(${idx})">${ticket.subject}</td>
-      <td><button onclick="deleteTicket(${idx})">Eliminar</button></td>
     `;
     tbody.appendChild(row);
   });
