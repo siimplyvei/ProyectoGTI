@@ -53,13 +53,24 @@ function hideTicketForm() {
   document.getElementById('ticket-subject').value = '';
 }
 
+function getCurrentDateTime() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+}
+
 function createTicket() {
   const subject = document.getElementById('ticket-subject').value.trim();
   if (!subject) return alert('El asunto es obligatorio');
   const projects = getProjects();
   if (selectedProjectIndex === null) return alert('Selecciona un proyecto');
   const project = projects[selectedProjectIndex];
-  project.tickets.push({ subject, type: 'Bug', state: 'New', priority: 'Normal' });
+  project.tickets.push({
+    subject,
+    type: 'Bug',
+    state: 'New',
+    priority: 'Normal',
+    updated: getCurrentDateTime()
+  });
   saveProjects(projects);
   hideTicketForm();
   renderTickets();
@@ -91,7 +102,16 @@ function renderTickets() {
       <td>${ticket.state}</td>
       <td ondblclick="editPriority(${i})">${ticket.priority}</td>
       <td ondblclick="editSubject(${i})">${ticket.subject}</td>
-      <td><button onclick="deleteTicket(${i})">Eliminar</button></td>
+      <td>${ticket.updated || ''}</td>
+      <td>
+        <div class="actions-menu-container">
+          <button class="actions-button" onclick="toggleDropdown(event)">⋮</button>
+          <div class="actions-dropdown hidden">
+            <button onclick="editSubject(${i})">✏️ Editar</button>
+            <button onclick="deleteTicket(${i})">🗑️ Eliminar</button>
+          </div>
+        </div>
+      </td>
     `;
 
     tableBody.appendChild(row);
@@ -104,6 +124,7 @@ function editPriority(index) {
   const newValue = prompt('Nueva prioridad:', project.tickets[index].priority);
   if (newValue) {
     project.tickets[index].priority = newValue;
+    project.tickets[index].updated = getCurrentDateTime();
     saveProjects(projects);
     renderTickets();
   }
@@ -115,6 +136,7 @@ function editSubject(index) {
   const newValue = prompt('Nuevo asunto:', project.tickets[index].subject);
   if (newValue) {
     project.tickets[index].subject = newValue;
+    project.tickets[index].updated = getCurrentDateTime();
     saveProjects(projects);
     renderTickets();
   }
@@ -129,5 +151,16 @@ function deleteTicket(index) {
     renderTickets();
   }
 }
+
+function toggleDropdown(event) {
+  event.stopPropagation();
+  document.querySelectorAll('.actions-dropdown').forEach(menu => menu.classList.add('hidden'));
+  const dropdown = event.target.nextElementSibling;
+  dropdown.classList.toggle('hidden');
+}
+
+document.addEventListener('click', () => {
+  document.querySelectorAll('.actions-dropdown').forEach(menu => menu.classList.add('hidden'));
+});
 
 renderProjects();
