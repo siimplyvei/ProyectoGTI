@@ -9,7 +9,6 @@ Este es un proyecto frontend simple para la gestión de proyectos y peticiones (
 - Guardado local automático usando `localStorage`.
 - Interfaz basada en dos vistas:
   - `index.html`: listado de proyectos.
-  - `project.html`: tabla de peticiones (tickets) de un proyecto.
 
 ## 🛠️ Tecnologías utilizadas
 
